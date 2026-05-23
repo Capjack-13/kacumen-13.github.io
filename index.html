@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leandro Lozada y Leon — Photojournalist</title>
+<meta name="description" content="Leandro Lozada is a photojournalist based in Louisville, KY. Clients include the Washington Post, AFP, Politico Magazine and Al Día News. Work has appeared in The Guardian, NPR, NYT, CNN and more.">
+<meta name="keywords" content="photojournalist, Louisville Kentucky, documentary photography, editorial photography, Washington Post, AFP, Politico, Leandro Lozada">
+<meta property="og:title" content="Leandro Lozada y Leon — Photojournalist">
+<meta property="og:description" content="Photojournalist based in Louisville, KY. Clients include the Washington Post, AFP, Politico Magazine and Al Día News.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://leandrolozada.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://leandrolozada.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sidebar:210px;
+  --white:#ffffff;
+  --black:#111111;
+  --mid:#999999;
+  --light:#e5e5e5;
+  --hover:#333333;
+  --sans:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+html,body{height:100%;overflow:hidden}
+body{background:var(--white);color:var(--black);font-family:var(--sans);font-weight:300;display:flex}
+
+/* ── SIDEBAR ── */
+#sidebar{
+  width:var(--sidebar);min-width:var(--sidebar);height:100vh;
+  display:flex;flex-direction:column;
+  padding:24px 16px 20px 20px;
+  border-right:1px solid var(--light);
+  overflow-y:auto;position:relative;z-index:10;background:var(--white);
+  flex-shrink:0;
+}
+#sidebar::-webkit-scrollbar{width:2px}
+#sidebar::-webkit-scrollbar-thumb{background:var(--light)}
+
+.site-title{
+  font-size:10.5px;font-weight:500;letter-spacing:0.13em;text-transform:uppercase;
+  color:var(--black);text-decoration:none;display:block;margin-bottom:26px;line-height:1.5;
+}
+
+.nav-section{margin-bottom:18px}
+.nav-label{
+  font-size:8.5px;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--light);margin-bottom:5px;display:block;font-weight:400;
+}
+.nav-list{list-style:none}
+.nav-list li{margin-bottom:0}
+.nav-list a{
+  font-size:11px;letter-spacing:0.01em;color:var(--mid);
+  text-decoration:none;display:block;padding:2.5px 0;
+  transition:color 0.12s;line-height:1.45;font-weight:300;
+}
+.nav-list a:hover{color:var(--black)}
+.nav-list a.active{color:var(--black);font-weight:400}
+
+.sidebar-bottom{
+  margin-top:auto;padding-top:16px;border-top:1px solid var(--light);
+}
+.sidebar-bottom a{
+  display:block;font-size:9.5px;letter-spacing:0.13em;text-transform:uppercase;
+  color:var(--mid);text-decoration:none;padding:3.5px 0;transition:color 0.12s;
+}
+.sidebar-bottom a:hover{color:var(--black)}
+.sidebar-bottom .ig-link{color:var(--black);font-weight:500}
+
+/* ── MAIN ── */
+#main{flex:1;height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden;min-width:0}
+
+/* ── SLIDESHOW ── */
+#slideshow{flex:1;position:relative;overflow:hidden;background:#f4f3f1;min-height:0}
+
+.slide{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.35s ease;pointer-events:none;
+}
+.slide.active{opacity:1;pointer-events:auto}
+
+.slide img{
+  max-width:100%;max-height:100%;width:100%;height:100%;
+  object-fit:contain;display:block;
+}
+
+.slide-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+}
+.slide-placeholder .ph-num{
+  font-size:52px;font-weight:300;color:#dddbd8;letter-spacing:-0.03em;line-height:1;
+}
+.slide-placeholder .ph-label{
+  font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:#cccccc;
+}
+.slide-placeholder .ph-instruction{
+  font-size:9px;letter-spacing:0.12em;color:#d8d6d3;margin-top:6px;
+  text-align:center;line-height:1.6;max-width:260px;
+}
+
+/* ── BOTTOM BAR ── */
+#bottom-bar{
+  background:var(--white);border-top:1px solid var(--light);
+  padding:0 20px;flex-shrink:0;
+}
+
+#caption-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:7px 0;border-bottom:1px solid var(--light);min-height:30px;
+}
+.caption-text{font-size:10px;letter-spacing:0.04em;color:var(--mid);flex:1;line-height:1.4}
+.slide-counter{font-size:10px;letter-spacing:0.08em;color:var(--mid);margin-left:16px;white-space:nowrap}
+
+#nav-row{
+  display:flex;align-items:center;padding:7px 0;gap:16px;
+}
+.ctrl-btn{
+  background:none;border:none;font-family:var(--sans);
+  font-size:9.5px;letter-spacing:0.12em;text-transform:lowercase;
+  color:var(--mid);cursor:pointer;padding:0;transition:color 0.12s;
+}
+.ctrl-btn:hover{color:var(--black)}
+.sep{color:var(--light);font-size:10px}
+
+.dot-strip{display:flex;gap:5px;flex-wrap:wrap;flex:1}
+.dot{
+  width:5px;height:5px;border-radius:50%;background:var(--light);
+  cursor:pointer;transition:background 0.12s;flex-shrink:0;
+}
+.dot.active{background:var(--black)}
+.dot:hover{background:var(--mid)}
+
+.thumb-toggle{
+  font-size:9.5px;letter-spacing:0.1em;text-transform:lowercase;
+  color:var(--mid);background:none;border:none;
+  font-family:var(--sans);cursor:pointer;padding:0;transition:color 0.12s;
+  margin-left:auto;white-space:nowrap;
+}
+.thumb-toggle:hover{color:var(--black)}
+
+/* ── THUMBNAIL PANEL ── */
+#thumbs-panel{
+  display:none;position:absolute;bottom:0;left:0;right:0;
+  background:var(--white);border-top:1px solid var(--light);
+  padding:10px 20px;overflow-x:auto;white-space:nowrap;z-index:20;
+}
+#thumbs-panel.open{display:block}
+.thumb{
+  display:inline-block;width:72px;height:52px;margin-right:5px;
+  cursor:pointer;overflow:hidden;vertical-align:top;
+  opacity:0.45;transition:opacity 0.15s;background:#f0efed;
+  flex-shrink:0;
+}
+.thumb.active,.thumb:hover{opacity:1}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb-ph{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:#cccccc;
+  background:#f0efed;
+}
+
+/* ── GALLERY HEADER ── */
+#gallery-header{
+  padding:10px 20px 0;background:var(--white);
+  display:flex;align-items:baseline;justify-content:space-between;
+}
+#gallery-name{font-size:10.5px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--black)}
+#gallery-category{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid)}
+
+/* ── INNER PAGES ── */
+.inner-page{
+  display:none;flex:1;height:100vh;overflow-y:auto;
+  padding:52px 60px 60px;
+}
+.inner-page.active{display:block}
+.inner-page h1{
+  font-size:10.5px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--black);margin-bottom:36px;
+}
+.inner-page p{
+  font-size:13.5px;line-height:1.85;color:#555;margin-bottom:18px;font-weight:300;max-width:560px;
+}
+.inner-page a{color:var(--black);border-bottom:1px solid var(--light);text-decoration:none;transition:border-color 0.15s}
+.inner-page a:hover{border-color:var(--black)}
+.inner-page .pub-list{margin:24px 0;list-style:none}
+.inner-page .pub-list li{
+  font-size:11px;letter-spacing:0.06em;color:var(--mid);
+  padding:5px 0;border-bottom:1px solid var(--light);
+}
+
+/* ── MOBILE ── */
+#mobile-menu-btn{
+  display:none;position:fixed;top:14px;left:14px;z-index:200;
+  background:none;border:none;cursor:pointer;font-family:var(--sans);
+  font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--black);
+  padding:6px 8px;
+}
+#sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.2);z-index:89}
+
+@media(max-width:720px){
+  html,body{overflow:auto}
+  #sidebar{
+    position:fixed;left:-220px;top:0;bottom:0;
+    width:220px;min-width:220px;z-index:90;
+    transition:left 0.28s ease;
+    box-shadow:none;
+  }
+  #sidebar.open{left:0;box-shadow:4px 0 20px rgba(0,0,0,0.08)}
+  #sidebar-overlay.open{display:block}
+  #main{height:100vh;min-height:0}
+  #mobile-menu-btn{display:block}
+  .site-title{padding-top:36px}
+  .inner-page{padding:52px 24px 40px}
+}
+</style>
+</head>
+<body>
+
+<button id="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Menu">Menu</button>
+<div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar" aria-label="Site navigation">
+  <a href="#" class="site-title" onclick="showFirstGallery();return false;">
+    Leandro<br>Lozada y Leon
+  </a>
+
+  <div class="nav-section">
+    <span class="nav-label">Editorial</span>
+    <ul class="nav-list">
+      <li><a href="#" data-cat="editorial" data-idx="0" onclick="selectProject(this);return false;">Louisville Protests</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="1" onclick="selectProject(this);return false;">CPAC 26</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="2" onclick="selectProject(this);return false;">NRA Atlanta 2025</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="3" onclick="selectProject(this);return false;">KY Derby 151</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="4" onclick="selectProject(this);return false;">KY Derby 152</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="5" onclick="selectProject(this);return false;">Whiskey House for WIRED</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="6" onclick="selectProject(this);return false;">The Athletic</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="7" onclick="selectProject(this);return false;">Derby Portraits</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="8" onclick="selectProject(this);return false;">Professional Bull Riding</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="9" onclick="selectProject(this);return false;">Sturgis KY Motorcycle Rally</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="10" onclick="selectProject(this);return false;">Eastern KY Floods</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="11" onclick="selectProject(this);return false;">Western KY Tornadoes</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="12" onclick="selectProject(this);return false;">Charlie Kirk Vigil</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="13" onclick="selectProject(this);return false;">Livestock Expo</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="14" onclick="selectProject(this);return false;">Portraits</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="15" onclick="selectProject(this);return false;">Covid-19 Portraits</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="16" onclick="selectProject(this);return false;">NFAC Coalition</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="17" onclick="selectProject(this);return false;">Ukrainian Refugees</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="18" onclick="selectProject(this);return false;">Militias</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="19" onclick="selectProject(this);return false;">KY Derby 150</a></li>
+      <li><a href="#" data-cat="editorial" data-idx="20" onclick="selectProject(this);return false;">DC</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-section">
+    <span class="nav-label">Personal</span>
+    <ul class="nav-list">
+      <li><a href="#" data-cat="personal" data-idx="0" onclick="selectProject(this);return false;">My Family on Film</a></li>
+      <li><a href="#" data-cat="personal" data-idx="1" onclick="selectProject(this);return false;">Re-enchantment</a></li>
+      <li><a href="#" data-cat="personal" data-idx="2" onclick="selectProject(this);return false;">Street</a></li>
+      <li><a href="#" data-cat="personal" data-idx="3" onclick="selectProject(this);return false;">Milk Portraits</a></li>
+    </ul>
+  </div>
+
+  <div class="nav-section">
+    <span class="nav-label">Commercial</span>
+    <ul class="nav-list">
+      <li><a href="#" data-cat="commercial" data-idx="0" onclick="selectProject(this);return false;">Wild Hats</a></li>
+      <li><a href="#" data-cat="commercial" data-idx="1" onclick="selectProject(this);return false;">Hotel Genevieve</a></li>
+      <li><a href="#" data-cat="commercial" data-idx="2" onclick="selectProject(this);return false;">Windy Hill Wagyu Farm</a></li>
+      <li><a href="#" data-cat="commercial" data-idx="3" onclick="selectProject(this);return false;">Fox Hollow Farm</a></li>
+      <li><a href="#" data-cat="commercial" data-idx="4" onclick="selectProject(this);return false;">Harbor Network Conference</a></li>
+    </ul>
+  </div>
+
+  <div class="sidebar-bottom">
+    <a href="#" onclick="showPage('about');return false;">About</a>
+    <a href="#" onclick="showPage('contact');return false;">Contact</a>
+    <a href="https://instagram.com/lozada1816" target="_blank" rel="noopener" class="ig-link">Instagram</a>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main id="main">
+
+  <!-- SLIDESHOW VIEW -->
+  <div id="view-slideshow" style="display:flex;flex-direction:column;height:100%;min-height:0">
+    <div id="gallery-header">
+      <span id="gallery-name">Louisville Protests</span>
+      <span id="gallery-category">Editorial</span>
+    </div>
+
+    <div id="slideshow"></div>
+
+    <div id="bottom-bar">
+      <div id="caption-row">
+        <span class="caption-text" id="caption-text"></span>
+        <span class="slide-counter" id="slide-counter">1 / 10</span>
+      </div>
+      <div id="nav-row">
+        <button class="ctrl-btn" onclick="prevSlide()">prev</button>
+        <span class="sep">/</span>
+        <button class="ctrl-btn" onclick="nextSlide()">next</button>
+        <div class="dot-strip" id="dot-strip"></div>
+        <button class="thumb-toggle" onclick="toggleThumbs()">show thumbnails</button>
+      </div>
+    </div>
+
+    <div id="thumbs-panel"></div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="inner-page" id="page-about">
+    <h1>About</h1>
+    <p>Leandro Lozada is a photojournalist based in Louisville, KY. He uses his camera and drone to document relevant stories.</p>
+    <p>His clients include the <strong style="font-weight:500">Washington Post</strong>, <strong style="font-weight:500">AFP</strong>, <strong style="font-weight:500">Politico Magazine</strong>, and <strong style="font-weight:500">Al Día News</strong>. His work has appeared in The Guardian, NPR, La Jornada, El País, The New York Times, CNN, and other publications.</p>
+    <p>He is available for assignments around the country and internationally.</p>
+    <p>Besides photography, Leandro loves his family, coffee, motorcycles, movies, music, books, and soccer.</p>
+    <p style="margin-top:32px">
+      <a href="mailto:kacumen@gmail.com">kacumen@gmail.com</a><br>
+      <span style="font-size:12px;color:var(--mid);letter-spacing:0.04em">502 407 4764</span>
+    </p>
+    <p style="margin-top:16px">
+      <a href="https://instagram.com/lozada1816" target="_blank" rel="noopener">@lozada1816 on Instagram</a>
+    </p>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="inner-page" id="page-contact">
+    <h1>Contact</h1>
+    <p>Available for editorial, commercial, and personal assignments worldwide.</p>
+    <p>
+      <a href="mailto:kacumen@gmail.com">kacumen@gmail.com</a><br>
+      <span style="font-size:12px;color:var(--mid);">502 407 4764</span>
+    </p>
+    <p style="margin-top:24px">
+      <a href="https://instagram.com/lozada1816" target="_blank" rel="noopener">Instagram — @lozada1816</a>
+    </p>
+  </div>
+
+</main>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Leandro Lozada y Leon","jobTitle":"Photojournalist","address":{"@type":"PostalAddress","addressLocality":"Louisville","addressRegion":"KY"},"email":"kacumen@gmail.com","telephone":"502-407-4764","sameAs":["https://instagram.com/lozada1816"],"worksFor":[{"@type":"Organization","name":"Washington Post"},{"@type":"Organization","name":"AFP"},{"@type":"Organization","name":"Politico Magazine"}],"description":"Photojournalist based in Louisville, KY covering editorial, commercial and personal documentary projects."}
+</script>
+
+<script>
+const PROJECTS = {
+  editorial: [
+    'Louisville Protests','CPAC 26','NRA Atlanta 2025','KY Derby 151','KY Derby 152',
+    'Whiskey House for WIRED','The Athletic','Derby Portraits','Professional Bull Riding',
+    'Sturgis KY Motorcycle Rally','Eastern KY Floods','Western KY Tornadoes',
+    'Charlie Kirk Vigil','Livestock Expo','Portraits','Covid-19 Portraits',
+    'NFAC Coalition','Ukrainian Refugees','Militias','KY Derby 150','DC'
+  ],
+  personal: ['My Family on Film','Re-enchantment','Street','Milk Portraits'],
+  commercial: ['Wild Hats','Hotel Genevieve','Windy Hill Wagyu Farm','Fox Hollow Farm','Harbor Network Conference']
+};
+
+const PHOTOS_PER_PROJECT = 10;
+const PLACEHOLDER_COLORS = [
+  '#f0edea','#eceae6','#ede9e5','#eae7e3','#eeebe7',
+  '#e8e6e2','#edeae6','#e9e6e2','#ece9e5','#eae8e4'
+];
+
+let curCat = 'editorial';
+let curIdx = 0;
+let curSlide = 0;
+let thumbsOpen = false;
+let totalSlides = PHOTOS_PER_PROJECT;
+
+function buildGallery(cat, idx) {
+  curCat = cat; curIdx = idx; curSlide = 0;
+  const name = PROJECTS[cat][idx];
+  totalSlides = PHOTOS_PER_PROJECT;
+
+  document.getElementById('gallery-name').textContent = name;
+  document.getElementById('gallery-category').textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+
+  const ss = document.getElementById('slideshow');
+  const tp = document.getElementById('thumbs-panel');
+  const ds = document.getElementById('dot-strip');
+  ss.innerHTML = ''; tp.innerHTML = ''; ds.innerHTML = '';
+
+  for (let i = 0; i < totalSlides; i++) {
+    // Slide
+    const slide = document.createElement('div');
+    slide.className = 'slide' + (i === 0 ? ' active' : '');
+    const ph = document.createElement('div');
+    ph.className = 'slide-placeholder';
+    ph.style.background = PLACEHOLDER_COLORS[i % PLACEHOLDER_COLORS.length];
+    ph.innerHTML =
+      '<div class="ph-num">' + String(i+1).padStart(2,'0') + '</div>' +
+      '<div class="ph-label">' + name + '</div>' +
+      '<div class="ph-instruction">Replace with your photo:<br>photos/' + cat + '/' + slugify(name) + '/photo-' + String(i+1).padStart(2,'0') + '.jpg</div>';
+    slide.appendChild(ph);
+    ss.appendChild(slide);
+
+    // Thumbnail
+    const thumb = document.createElement('div');
+    thumb.className = 'thumb' + (i === 0 ? ' active' : '');
+    thumb.style.background = PLACEHOLDER_COLORS[i % PLACEHOLDER_COLORS.length];
+    const tph = document.createElement('div');
+    tph.className = 'thumb-ph';
+    tph.style.background = PLACEHOLDER_COLORS[i % PLACEHOLDER_COLORS.length];
+    tph.textContent = String(i+1).padStart(2,'0');
+    thumb.appendChild(tph);
+    const iCopy = i;
+    thumb.onclick = () => goToSlide(iCopy);
+    tp.appendChild(thumb);
+
+    // Dot
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    ds.appendChild(dot);
+  }
+
+  updateUI();
+}
+
+function slugify(str) {
+  return str.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+}
+
+function updateUI() {
+  const name = PROJECTS[curCat][curIdx];
+  document.getElementById('caption-text').textContent = name;
+  document.getElementById('slide-counter').textContent = (curSlide+1) + ' / ' + totalSlides;
+}
+
+function goToSlide(idx) {
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const thumbs = document.querySelectorAll('.thumb');
+  slides[curSlide].classList.remove('active');
+  dots[curSlide].classList.remove('active');
+  thumbs[curSlide].classList.remove('active');
+  curSlide = idx;
+  slides[curSlide].classList.add('active');
+  dots[curSlide].classList.add('active');
+  thumbs[curSlide].classList.add('active');
+  updateUI();
+}
+
+function nextSlide() { goToSlide((curSlide + 1) % totalSlides); }
+function prevSlide() { goToSlide((curSlide - 1 + totalSlides) % totalSlides); }
+
+function selectProject(el) {
+  const cat = el.dataset.cat;
+  const idx = parseInt(el.dataset.idx);
+  document.querySelectorAll('.nav-list a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+  showSlideshowView();
+  buildGallery(cat, idx);
+  closeSidebar();
+}
+
+function showFirstGallery() {
+  const first = document.querySelector('.nav-list a');
+  if (first) selectProject(first);
+  else showSlideshowView();
+}
+
+function showSlideshowView() {
+  document.getElementById('view-slideshow').style.display = 'flex';
+  document.querySelectorAll('.inner-page').forEach(p => p.classList.remove('active'));
+}
+
+function showPage(page) {
+  document.getElementById('view-slideshow').style.display = 'none';
+  document.querySelectorAll('.inner-page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('.nav-list a').forEach(a => a.classList.remove('active'));
+  closeSidebar();
+}
+
+function toggleThumbs() {
+  thumbsOpen = !thumbsOpen;
+  document.getElementById('thumbs-panel').classList.toggle('open', thumbsOpen);
+  document.querySelector('.thumb-toggle').textContent = thumbsOpen ? 'hide thumbnails' : 'show thumbnails';
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebar-overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  if (window.innerWidth <= 720) {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('open');
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (document.getElementById('view-slideshow').style.display !== 'none') {
+    if (e.key === 'ArrowRight') nextSlide();
+    if (e.key === 'ArrowLeft') prevSlide();
+  }
+});
+
+// Init
+showFirstGallery();
+document.querySelector('.nav-list a').classList.add('active');
+</script>
+</body>
+</html>
