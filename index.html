@@ -14,235 +14,244 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--sans:'Montserrat','Helvetica Neue',Helvetica,Arial,sans-serif}
-html,body{height:100%;background:#111}
-body{font-family:var(--sans);font-weight:300;overflow:hidden}
-
-/* ── SLIDESHOW ── */
-#slideshow{position:fixed;inset:0;z-index:0;background:#111}
-
-.slide{
-  position:absolute;inset:0;
-  opacity:0;
-  transition:opacity 0.6s ease;
-  pointer-events:none;
-}
-.slide.active{
-  opacity:1;
-  pointer-events:auto;
-  cursor:pointer;
-}
-.slide img{
-  width:100%;height:100%;
-  object-fit:contain;
-  display:block;
-  background:#111;
-}
-.slide::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,transparent 50%,rgba(0,0,0,0.2) 100%);
-  pointer-events:none;
-}
-.slide-placeholder{
-  width:100%;height:100%;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-  background:#1a1a1a;
-}
-.ph-num{font-size:60px;font-weight:200;color:rgba(255,255,255,0.06);line-height:1}
-.ph-hint{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.15)}
+html,body{height:100%;background:#fff}
+body{font-family:var(--sans);font-weight:300;color:#111}
 
 /* ── NAV ── */
 #nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:flex-start;justify-content:space-between;
-  padding:22px 28px;
-  pointer-events:none;
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:#fff;
+  border-bottom:1px solid #e8e8e8;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 28px;
+  height:64px;
 }
-#nav > *{pointer-events:auto}
 
 .nav-logo{
-  font-size:13px;font-weight:300;letter-spacing:0.28em;text-transform:uppercase;
-  color:#fff;text-decoration:none;line-height:1.5;
-  text-shadow:0 1px 6px rgba(0,0,0,0.5);
+  font-size:13px;font-weight:300;letter-spacing:0.25em;text-transform:uppercase;
+  color:#111;text-decoration:none;line-height:1.4;
 }
 .nav-logo span{
-  display:block;font-size:8px;letter-spacing:0.14em;
-  color:rgba(255,255,255,0.4);text-transform:none;margin-top:2px;
+  display:block;font-size:8px;letter-spacing:0.12em;
+  color:#999;text-transform:none;margin-top:2px;
 }
 
-.nav-right{position:relative}
-.nav-links{display:flex;gap:20px;list-style:none;align-items:center}
+.nav-right{position:relative;display:flex;align-items:center;gap:24px}
+
+.nav-links{display:flex;gap:24px;list-style:none;align-items:center}
 .nav-links a,.nav-links button{
-  font-family:var(--sans);font-size:11px;font-weight:300;
+  font-family:var(--sans);font-size:10px;font-weight:300;
   letter-spacing:0.18em;text-transform:uppercase;
-  color:rgba(255,255,255,0.8);text-decoration:none;
+  color:#666;text-decoration:none;
   background:none;border:none;cursor:pointer;padding:0;
-  transition:color 0.15s;text-shadow:0 1px 4px rgba(0,0,0,0.4);
+  transition:color 0.15s;
 }
-.nav-links a:hover,.nav-links button:hover{color:#fff}
+.nav-links a:hover,.nav-links button:hover{color:#111}
 
 /* desktop dropdowns */
 .dd-wrap{position:relative}
 .dd{
   display:none;
-  position:absolute;top:100%;right:0;
-  padding-top:12px;
-  min-width:200px;z-index:200;
+  position:absolute;top:calc(100% + 16px);right:0;
+  padding-top:0;
+  min-width:210px;z-index:300;
+  background:#fff;
+  border:1px solid #e8e8e8;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
 }
 .dd-wrap:hover .dd{display:block}
-.dd-inner{
-  background:rgba(10,10,10,0.97);
-  border:1px solid rgba(255,255,255,0.1);
-  backdrop-filter:blur(12px);
-  box-shadow:0 8px 32px rgba(0,0,0,0.4);
-}
 .dd a{
-  display:block;font-size:9px;font-weight:300;
+  display:block;font-size:10px;font-weight:300;
   letter-spacing:0.1em;text-transform:uppercase;
-  color:rgba(255,255,255,0.6);text-decoration:none;
-  padding:8px 16px;transition:color 0.12s;
+  color:#666;text-decoration:none;
+  padding:9px 16px;transition:color 0.12s,background 0.12s;
+  border-bottom:1px solid #f5f5f5;
 }
-.dd a:hover{color:#fff;background:rgba(255,255,255,0.05)}
+.dd a:last-child{border-bottom:none}
+.dd a:hover{color:#111;background:#fafafa}
+
+/* Instagram icon */
+.nav-ig svg{display:block}
 
 /* hamburger */
 .hamburger{
   display:none;background:none;border:none;cursor:pointer;
   padding:4px;flex-direction:column;gap:5px;
 }
-.hamburger span{width:20px;height:1px;background:#fff;display:block}
+.hamburger span{width:20px;height:1px;background:#111;display:block}
 
 /* mobile menu */
 #mob-menu{
   display:none;
   position:absolute;top:calc(100% + 10px);right:0;
-  background:rgba(10,10,10,0.96);
-  border:1px solid rgba(255,255,255,0.08);
-  min-width:200px;max-height:75vh;overflow-y:auto;
-  z-index:200;
+  background:#fff;
+  border:1px solid #e8e8e8;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  min-width:210px;max-height:75vh;overflow-y:auto;
+  z-index:300;
 }
 #mob-menu.open{display:block}
 .mob-section{
   font-size:8px;letter-spacing:0.22em;text-transform:uppercase;
-  color:rgba(255,255,255,0.2);padding:10px 16px 3px;display:block;
+  color:#bbb;padding:10px 16px 3px;display:block;
 }
 .mob-btn{
   display:block;width:100%;text-align:left;
-  font-family:var(--sans);font-size:9px;font-weight:300;
+  font-family:var(--sans);font-size:10px;font-weight:300;
   letter-spacing:0.1em;text-transform:uppercase;
-  color:rgba(255,255,255,0.6);text-decoration:none;
-  padding:7px 16px;
+  color:#666;text-decoration:none;
+  padding:8px 16px;
   background:none;border:none;cursor:pointer;
   transition:color 0.12s;
 }
-.mob-btn:hover{color:#fff}
+.mob-btn:hover{color:#111}
 
-/* ── SLIDE INFO ── */
-#slide-info{
-  position:fixed;bottom:0;left:0;right:0;z-index:100;
-  padding:18px 28px 22px;pointer-events:none;
+/* ── MAIN CONTENT ── */
+#main{
+  padding-top:64px;
+  min-height:100vh;
+  background:#fff;
 }
-#info-cat{font-size:8px;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:4px}
-#info-name{font-size:10px;font-weight:300;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.7)}
 
-/* ── ARROWS ── */
-#gallery-page.open ~ #arrows,
-#gallery-page.open ~ #dots,
-#gallery-page.open ~ #slide-info{ display:none !important; }
-#inner-page.open ~ #arrows,
-#inner-page.open ~ #dots,
-#inner-page.open ~ #slide-info{ display:none !important; }
+/* ── SLIDESHOW ── */
+#slideshow{
+  position:relative;
+  width:100%;
+  height:calc(100vh - 64px);
+  background:#f5f5f5;
+  overflow:hidden;
+}
+.slide{
+  position:absolute;inset:0;
+  opacity:0;transition:opacity 0.6s ease;
+  pointer-events:none;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+}
+.slide.active{opacity:1;pointer-events:auto}
+.slide img{
+  width:100%;height:100%;
+  object-fit:contain;display:block;
+  background:#f5f5f5;
+}
+.slide-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  background:#f5f5f5;
+}
+.ph-num{font-size:60px;font-weight:200;color:#ddd;line-height:1}
+.ph-hint{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:#ccc}
+
+/* slide info */
+#slide-info{
+  position:absolute;bottom:20px;left:28px;
+  pointer-events:none;
+}
+#info-cat{font-size:8px;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:#999;margin-bottom:3px}
+#info-name{font-size:11px;font-weight:300;letter-spacing:0.15em;text-transform:uppercase;color:#333}
+
+/* arrows */
 #arrows{
-  position:fixed;top:50%;transform:translateY(-50%);
-  left:0;right:0;z-index:100;
+  position:absolute;top:50%;transform:translateY(-50%);
+  left:0;right:0;
   display:flex;justify-content:space-between;padding:0 12px;
   pointer-events:none;
 }
 .arr{
-  background:none;border:none;color:rgba(255,255,255,0.35);
+  background:none;border:none;color:rgba(0,0,0,0.2);
   font-size:32px;cursor:pointer;pointer-events:auto;
   padding:10px;line-height:1;transition:color 0.15s;
 }
-.arr:hover{color:#fff}
+.arr:hover{color:#111}
 
-/* ── DOTS ── */
+/* dots */
 #dots{
-  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
-  z-index:100;display:flex;gap:6px;
+  position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
+  display:flex;gap:6px;
 }
 .dot{
   width:4px;height:4px;border-radius:50%;
-  background:rgba(255,255,255,0.2);
+  background:rgba(0,0,0,0.15);
   border:none;padding:0;cursor:pointer;
   transition:background 0.2s;
 }
-.dot.active{background:rgba(255,255,255,0.8)}
+.dot.active{background:rgba(0,0,0,0.5)}
 
 /* ── GALLERY PAGE ── */
 #gallery-page{
-  display:none;position:fixed;inset:0;top:70px;z-index:50;
-  background:#111;overflow:hidden;
-  flex-direction:column;
+  display:none;position:fixed;
+  top:64px;left:0;right:0;bottom:0;
+  z-index:100;background:#fff;
+  flex-direction:column;overflow:hidden;
 }
 #gallery-page.open{display:flex}
 
 .gp-bar{
-  position:relative;z-index:10;
-  background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);
-  border-bottom:1px solid rgba(255,255,255,0.08);
-  padding:12px 20px;display:flex;align-items:center;gap:14px;flex-shrink:0;
+  display:flex;align-items:center;gap:14px;
+  padding:12px 28px;
+  border-bottom:1px solid #e8e8e8;
+  flex-shrink:0;background:#fff;
 }
 .gp-back{
   font-size:9px;letter-spacing:0.16em;text-transform:uppercase;
-  color:rgba(255,255,255,0.5);background:none;border:none;cursor:pointer;
+  color:#999;background:none;border:none;cursor:pointer;
   font-family:var(--sans);font-weight:300;padding:0;transition:color 0.15s;
 }
-.gp-back:hover{color:#fff}
-.gp-sep{color:rgba(255,255,255,0.2)}
-.gp-title{font-size:10px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.8)}
-.gp-cat{font-size:8px;font-weight:200;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-left:auto}
-/* Gallery slideshow */
-.gp-slideshow{position:relative;flex:1;background:#111;overflow:hidden;min-height:0}
-.gp-slide{position:absolute;inset:0;opacity:0;transition:opacity 0.4s;pointer-events:none;display:flex;align-items:center;justify-content:center}
-.gp-slide.active{opacity:1;pointer-events:auto}
-.gp-slide img{max-width:100%;max-height:100%;object-fit:contain;display:block}
-.gp-slide-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#1a1a1a}
-.gp-slide-ph-n{font-size:60px;font-weight:200;color:rgba(255,255,255,0.06)}
-.gp-nav-row{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:#111;flex-shrink:0}
-.gp-arr{background:none;border:none;color:rgba(255,255,255,0.5);font-size:28px;cursor:pointer;padding:8px;line-height:1;transition:color 0.15s}
-.gp-arr:hover{color:#fff}
-.gp-counter{font-size:10px;letter-spacing:0.12em;color:rgba(255,255,255,0.4);font-family:var(--sans)}
-.gp-dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;max-width:60%}
-.gp-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;padding:0;cursor:pointer;transition:background 0.15s}
-.gp-dot.active{background:rgba(255,255,255,0.8)}
+.gp-back:hover{color:#111}
+.gp-sep{color:#ddd;font-size:10px}
+.gp-title{font-size:10px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:#111}
+.gp-cat{font-size:8px;font-weight:200;letter-spacing:0.16em;text-transform:uppercase;color:#bbb;margin-left:auto}
 
-/* ── LIGHTBOX ── */
-#lightbox{
-  display:none;position:fixed;inset:0;z-index:500;
-  background:rgba(0,0,0,0.96);align-items:center;justify-content:center;
+/* gallery slideshow */
+.gp-slideshow{
+  flex:1;position:relative;
+  background:#fff;overflow:hidden;min-height:0;
 }
-#lightbox.open{display:flex}
-#lb-img{max-width:90vw;max-height:88vh;object-fit:contain;display:block}
-#lb-close{position:absolute;top:16px;right:20px;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;opacity:0.5;line-height:1;font-family:var(--sans)}
-#lb-close:hover{opacity:1}
-#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:32px;cursor:pointer;opacity:0.3;padding:16px;line-height:1}
-#lb-prev:hover,#lb-next:hover{opacity:1}
-#lb-prev{left:4px}#lb-next{right:4px}
-#lb-count{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:0.14em;color:rgba(255,255,255,0.3);font-family:var(--sans)}
+.gp-slide{
+  position:absolute;inset:0;opacity:0;
+  transition:opacity 0.4s;pointer-events:none;
+  display:flex;align-items:center;justify-content:center;
+}
+.gp-slide.active{opacity:1;pointer-events:auto}
+.gp-slide img{
+  max-width:100%;max-height:100%;
+  object-fit:contain;display:block;
+  background:#fff;
+}
+
+.gp-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 20px;border-top:1px solid #e8e8e8;
+  flex-shrink:0;background:#fff;
+}
+.gp-arr{
+  background:none;border:none;color:#bbb;
+  font-size:24px;cursor:pointer;padding:6px;line-height:1;transition:color 0.15s;
+}
+.gp-arr:hover{color:#111}
+.gp-counter{font-size:10px;letter-spacing:0.1em;color:#999;font-family:var(--sans)}
+.gp-dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.gp-dot{
+  width:4px;height:4px;border-radius:50%;
+  background:rgba(0,0,0,0.12);border:none;padding:0;cursor:pointer;transition:background 0.15s;
+}
+.gp-dot.active{background:rgba(0,0,0,0.5)}
 
 /* ── INNER PAGES ── */
 #inner-page{
-  display:none;position:fixed;inset:0;top:70px;z-index:50;
-  background:#fff;overflow-y:auto;
+  display:none;position:fixed;
+  top:64px;left:0;right:0;bottom:0;
+  z-index:100;background:#fff;overflow-y:auto;
 }
 #inner-page.open{display:block}
 .ip-bar{
-  position:sticky;top:0;background:rgba(255,255,255,0.96);
-  backdrop-filter:blur(10px);border-bottom:1px solid #e8e8e8;
-  padding:14px 28px;display:flex;align-items:center;gap:14px;
+  padding:14px 28px;border-bottom:1px solid #e8e8e8;
+  display:flex;align-items:center;gap:14px;background:#fff;
 }
 .ip-back{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#999;background:none;border:none;cursor:pointer;font-family:var(--sans);font-weight:300;padding:0;transition:color 0.15s}
 .ip-back:hover{color:#111}
 .ip-title{font-size:10px;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:#111}
-.ip-body{max-width:560px;margin:0 auto;padding:52px 28px 80px}
+.ip-body{max-width:560px;margin:0 auto;padding:48px 28px 80px}
 .ip-body p{font-size:14px;line-height:2;color:#555;margin-bottom:20px;font-weight:300}
 .ip-body a{color:#111;text-decoration:none;border-bottom:1px solid #ddd;transition:border-color 0.15s}
 .ip-body a:hover{border-color:#111}
@@ -251,43 +260,43 @@ body{font-family:var(--sans);font-weight:300;overflow:hidden}
 @media(max-width:700px){
   .nav-links{display:none}
   .hamburger{display:flex}
-  #nav{padding:16px 18px}
-  #slide-info{padding:14px 18px 52px}
-  .gp-grid{columns:2}
-  .gp-bar,.ip-bar{padding:12px 16px}
+  #nav{padding:14px 18px}
+  #slide-info{left:18px;bottom:52px}
+  .gp-bar,.ip-bar{padding:10px 16px}
   .ip-body{padding:32px 16px 60px}
 }
-@media(max-width:400px){.gp-grid{columns:1}}
+@media(max-width:400px){
+  .gp-dots{display:none}
+}
 </style>
 </head>
 <body>
 
-<div id="slideshow"></div>
-
+<!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo" onclick="showHome();return false;">
     LOZADA PHOTOGRAPHY
     <span>kacumen@gmail.com &nbsp;·&nbsp; 502 407 4764</span>
   </a>
   <div class="nav-right">
-    <ul class="nav-links" id="desktop-nav">
+    <ul class="nav-links">
       <li class="dd-wrap">
         <button>Editorial</button>
-        <div class="dd"><div class="dd-inner" id="dd-editorial"></div></div>
+        <div class="dd" id="dd-editorial"></div>
       </li>
       <li class="dd-wrap">
         <button>Personal</button>
-        <div class="dd"><div class="dd-inner" id="dd-personal"></div></div>
+        <div class="dd" id="dd-personal"></div>
       </li>
       <li class="dd-wrap">
         <button>Commercial</button>
-        <div class="dd"><div class="dd-inner" id="dd-commercial"></div></div>
+        <div class="dd" id="dd-commercial"></div>
       </li>
       <li><a href="#" onclick="showPage('contact');return false;">Contact</a></li>
       <li><a href="#" onclick="showPage('about');return false;">About</a></li>
       <li>
-        <a href="https://instagram.com/lozada1816" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="rgba(255,255,255,0.8)" stroke="none"/></svg>
+        <a href="https://instagram.com/lozada1816" target="_blank" rel="noopener" class="nav-ig" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="#666" stroke="none"/></svg>
         </a>
       </li>
     </ul>
@@ -309,18 +318,22 @@ body{font-family:var(--sans);font-weight:300;overflow:hidden}
   </div>
 </nav>
 
-<div id="slide-info">
-  <div id="info-cat"></div>
-  <div id="info-name"></div>
+<!-- MAIN -->
+<div id="main">
+  <div id="slideshow">
+    <div id="slide-info">
+      <div id="info-cat"></div>
+      <div id="info-name"></div>
+    </div>
+    <div id="arrows">
+      <button class="arr" onclick="prevSlide()">&#8249;</button>
+      <button class="arr" onclick="nextSlide()">&#8250;</button>
+    </div>
+    <div id="dots"></div>
+  </div>
 </div>
 
-<div id="arrows">
-  <button class="arr" onclick="prevSlide()">&#8249;</button>
-  <button class="arr" onclick="nextSlide()">&#8250;</button>
-</div>
-
-<div id="dots"></div>
-
+<!-- GALLERY -->
 <div id="gallery-page">
   <div class="gp-bar">
     <button class="gp-back" onclick="closeGallery()">← Back</button>
@@ -329,14 +342,15 @@ body{font-family:var(--sans);font-weight:300;overflow:hidden}
     <span class="gp-cat" id="gp-cat"></span>
   </div>
   <div class="gp-slideshow" id="gp-slideshow"></div>
-  <div class="gp-nav-row">
+  <div class="gp-bottom">
     <button class="gp-arr" onclick="gpPrev()">&#8249;</button>
     <div class="gp-dots" id="gp-dots"></div>
-    <span class="gp-counter" id="gp-counter">1 / 1</span>
+    <span class="gp-counter" id="gp-counter"></span>
     <button class="gp-arr" onclick="gpNext()">&#8250;</button>
   </div>
 </div>
 
+<!-- INNER PAGE -->
 <div id="inner-page">
   <div class="ip-bar">
     <button class="ip-back" onclick="closePage()">← Back</button>
@@ -346,283 +360,194 @@ body{font-family:var(--sans);font-weight:300;overflow:hidden}
   <div class="ip-body" id="ip-body"></div>
 </div>
 
-<div id="lightbox">
-  <button id="lb-close" onclick="closeLb()">×</button>
-  <button id="lb-prev" onclick="lbNav(-1)">‹</button>
-  <img id="lb-img" src="" alt="">
-  <button id="lb-next" onclick="lbNav(1)">›</button>
-  <div id="lb-count"></div>
-</div>
-
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Leandro Lozada y Leon","jobTitle":"Photojournalist","address":{"@type":"PostalAddress","addressLocality":"Louisville","addressRegion":"KY"},"email":"kacumen@gmail.com","telephone":"502-407-4764","url":"https://lozadaphotography.com","sameAs":["https://instagram.com/lozada1816"]}
 </script>
 
 <script>
-// ── DATA ──
-const G = {
+var G = {
   editorial:[
-    {name:'Louisville Protests', slug:'louisvilleprotests', photos:10},
-    {name:'CPAC 26',             slug:'cpac-26',            photos:5},
-    {name:'NRA Atlanta 2025',    slug:'nra-atlanta-2025',   photos:8},
-    {name:'KY Derby 151',        slug:'ky-derby-151',       photos:8},
-    {name:'KY Derby 152',        slug:'ky-derby-152',       photos:8},
-    {name:'Whiskey House for WIRED', slug:'bourbon',        photos:8},
-    {name:'The Athletic',        slug:'the-athletic',       photos:8},
-    {name:'Derby Portraits',     slug:'derby-portraits',    photos:8},
-    {name:'Professional Bull Riding', slug:'pbr',           photos:8},
-    {name:'Sturgis KY Motorcycle Rally', slug:'sturgis-ky-motorcycle-rally', photos:8},
-    {name:'Eastern KY Floods',   slug:'eastern-ky-floods',  photos:8},
-    {name:'Western KY Tornadoes',slug:'mayfield-dawson',    photos:8},
-    {name:'Charlie Kirk Vigil',  slug:'new-gallery-4',      photos:8},
-    {name:'Livestock Expo',      slug:'livestock-expo',     photos:8},
-    {name:'Portraits',           slug:'rust',               photos:8},
-    {name:'Covid-19 Portraits',  slug:'covid19-portraits',  photos:8},
-    {name:'NFAC Coalition',      slug:'nafc-coalition',     photos:8},
-    {name:'Ukrainian Refugees',  slug:'new-gallery-1',      photos:8},
-    {name:'Militias',            slug:'militias',           photos:8},
-    {name:'KY Derby 150',        slug:'kyderby',            photos:8},
-    {name:'DC',                  slug:'gallerydc',          photos:8}
+    {name:'Louisville Protests',slug:'louisvilleprotests',photos:10},
+    {name:'CPAC 26',slug:'cpac-26',photos:5},
+    {name:'NRA Atlanta 2025',slug:'nra-atlanta-2025',photos:8},
+    {name:'KY Derby 151',slug:'ky-derby-151',photos:8},
+    {name:'KY Derby 152',slug:'ky-derby-152',photos:8},
+    {name:'Whiskey House for WIRED',slug:'bourbon',photos:8},
+    {name:'The Athletic',slug:'the-athletic',photos:8},
+    {name:'Derby Portraits',slug:'derby-portraits',photos:8},
+    {name:'Professional Bull Riding',slug:'pbr',photos:8},
+    {name:'Sturgis KY Motorcycle Rally',slug:'sturgis-ky-motorcycle-rally',photos:8},
+    {name:'Eastern KY Floods',slug:'eastern-ky-floods',photos:8},
+    {name:'Western KY Tornadoes',slug:'mayfield-dawson',photos:8},
+    {name:'Charlie Kirk Vigil',slug:'new-gallery-4',photos:8},
+    {name:'Livestock Expo',slug:'livestock-expo',photos:8},
+    {name:'Portraits',slug:'rust',photos:8},
+    {name:'Covid-19 Portraits',slug:'covid19-portraits',photos:8},
+    {name:'NFAC Coalition',slug:'nafc-coalition',photos:8},
+    {name:'Ukrainian Refugees',slug:'new-gallery-1',photos:8},
+    {name:'Militias',slug:'militias',photos:8},
+    {name:'KY Derby 150',slug:'kyderby',photos:8},
+    {name:'DC',slug:'gallerydc',photos:8}
   ],
   personal:[
-    {name:'My Family on Film', slug:'new-gallery-12', photos:8},
-    {name:'Re-enchantment',    slug:'miscelaneous',   photos:8},
-    {name:'Street',            slug:'water',          photos:8},
-    {name:'Milk Portraits',    slug:'milk-portraits', photos:8}
+    {name:'My Family on Film',slug:'new-gallery-12',photos:8},
+    {name:'Re-enchantment',slug:'miscelaneous',photos:8},
+    {name:'Street',slug:'water',photos:8},
+    {name:'Milk Portraits',slug:'milk-portraits',photos:8}
   ],
   commercial:[
-    {name:'Wild Hats',               slug:'wild-hats',                photos:8},
-    {name:'Hotel Genevieve',         slug:'hotel-genevieve',          photos:8},
-    {name:'Windy Hill Wagyu Farm',   slug:'windy-hill-waygu-farm',    photos:8},
-    {name:'Fox Hollow Farm',         slug:'fox-hollow-farm',          photos:8},
-    {name:'Harbor Network Conference', slug:'harbor-network-conference', photos:8}
+    {name:'Wild Hats',slug:'wild-hats',photos:8},
+    {name:'Hotel Genevieve',slug:'hotel-genevieve',photos:8},
+    {name:'Windy Hill Wagyu Farm',slug:'windy-hill-waygu-farm',photos:8},
+    {name:'Fox Hollow Farm',slug:'fox-hollow-farm',photos:8},
+    {name:'Harbor Network Conference',slug:'harbor-network-conference',photos:8}
   ]
 };
+var CATS = {editorial:'Editorial',personal:'Personal',commercial:'Commercial'};
+var BASE = '/kacumen-13.github.io/';
 
-const CATS = {editorial:'Editorial', personal:'Personal', commercial:'Commercial'};
-
-// ── STATE ──
-var currentSlide = 0;
-var lbPhotos = [];
-var lbIndex = 0;
-
-// ── BUILD FLAT LIST ──
+// flat list
 var allSlides = [];
-['editorial','personal','commercial'].forEach(function(cat) {
-  G[cat].forEach(function(g, i) {
-    allSlides.push({name:g.name, slug:g.slug, photos:g.photos, cat:cat, idx:i});
-  });
+['editorial','personal','commercial'].forEach(function(cat){
+  G[cat].forEach(function(g,i){ allSlides.push({name:g.name,slug:g.slug,photos:g.photos,cat:cat,idx:i}); });
 });
 
-// ── SLIDESHOW ──
-function buildSlideshow() {
+var curSlide = 0;
+var gpCurrent = 0;
+var gpTotal = 0;
+
+// BUILD SLIDESHOW
+function buildSlideshow(){
   var ss = document.getElementById('slideshow');
   var ds = document.getElementById('dots');
-
-  allSlides.forEach(function(p, i) {
-    // Create slide
+  allSlides.forEach(function(p,i){
     var s = document.createElement('div');
-    s.className = 'slide' + (i === 0 ? ' active' : '');
-
-    // Capture values on the element itself to avoid closure issues
+    s.className = 'slide'+(i===0?' active':'');
     s.dataset.cat = p.cat;
-    s.dataset.idx = p.idx;
-    s.addEventListener('click', function() {
+    s.dataset.idx = String(p.idx);
+    s.addEventListener('click',function(){
       openGallery(this.dataset.cat, parseInt(this.dataset.idx));
     });
-
-    // Cover image
     var img = document.createElement('img');
     img.alt = p.name;
-    img.src = '/kacumen-13.github.io/photos/' + p.cat + '/' + p.slug + '/cover.jpg';
-    img.addEventListener('error', function() {
-      img.style.display = 'none';
-      var ph = document.createElement('div');
-      ph.className = 'slide-placeholder';
-      ph.innerHTML = '<div class="ph-num">' + String(i+1).padStart(2,'0') + '</div>' +
-                     '<div class="ph-hint">' + p.name + '</div>';
+    img.src = BASE+'photos/'+p.cat+'/'+p.slug+'/cover.jpg';
+    img.addEventListener('error',function(){
+      this.style.display='none';
+      var ph=document.createElement('div');ph.className='slide-placeholder';
+      ph.innerHTML='<div class="ph-num">'+String(i+1).padStart(2,'0')+'</div><div class="ph-hint">'+p.name+'</div>';
       s.appendChild(ph);
     });
     s.appendChild(img);
-    ss.appendChild(s);
-
-    // Dot
-    var d = document.createElement('button');
-    d.className = 'dot' + (i === 0 ? ' active' : '');
-    (function(slideIndex) {
-      d.addEventListener('click', function(e) {
-        e.stopPropagation();
-        goToSlide(slideIndex);
-      });
-    })(i);
+    ss.insertBefore(s, document.getElementById('slide-info'));
+    var d=document.createElement('button');
+    d.className='dot'+(i===0?' active':'');
+    (function(n){d.addEventListener('click',function(e){e.stopPropagation();goToSlide(n);});})(i);
     ds.appendChild(d);
   });
-
   updateInfo();
 }
 
-function goToSlide(n) {
-  var slides = document.querySelectorAll('.slide');
-  var dots = document.querySelectorAll('.dot');
-  slides[currentSlide].classList.remove('active');
-  dots[currentSlide].classList.remove('active');
-  currentSlide = n;
-  slides[currentSlide].classList.add('active');
-  dots[currentSlide].classList.add('active');
+function goToSlide(n){
+  document.querySelectorAll('.slide')[curSlide].classList.remove('active');
+  document.querySelectorAll('.dot')[curSlide].classList.remove('active');
+  curSlide=n;
+  document.querySelectorAll('.slide')[curSlide].classList.add('active');
+  document.querySelectorAll('.dot')[curSlide].classList.add('active');
   updateInfo();
 }
-
-function nextSlide() { goToSlide((currentSlide + 1) % allSlides.length); }
-function prevSlide() { goToSlide((currentSlide - 1 + allSlides.length) % allSlides.length); }
-
-function updateInfo() {
-  var p = allSlides[currentSlide];
-  document.getElementById('info-cat').textContent = CATS[p.cat];
-  document.getElementById('info-name').textContent = p.name;
+function nextSlide(){goToSlide((curSlide+1)%allSlides.length);}
+function prevSlide(){goToSlide((curSlide-1+allSlides.length)%allSlides.length);}
+function updateInfo(){
+  document.getElementById('info-cat').textContent=CATS[allSlides[curSlide].cat];
+  document.getElementById('info-name').textContent=allSlides[curSlide].name;
 }
 
-// ── NAV DROPDOWNS ──
-function buildNavs() {
-  ['editorial','personal','commercial'].forEach(function(cat) {
-    var dd = document.getElementById('dd-' + cat);
-    var mob = document.getElementById('mob-' + cat);
-    G[cat].forEach(function(g, i) {
-      // Desktop
-      var a = document.createElement('a');
-      a.href = '#';
-      a.textContent = g.name;
-      (function(c, idx) {
-        a.addEventListener('click', function(e) { e.preventDefault(); openGallery(c, idx); });
-      })(cat, i);
+// BUILD NAV
+function buildNavs(){
+  ['editorial','personal','commercial'].forEach(function(cat){
+    var dd=document.getElementById('dd-'+cat);
+    var mob=document.getElementById('mob-'+cat);
+    G[cat].forEach(function(g,i){
+      var a=document.createElement('a');a.href='#';a.textContent=g.name;
+      (function(c,n){a.addEventListener('click',function(e){e.preventDefault();openGallery(c,n);});})(cat,i);
       dd.appendChild(a);
-      // Mobile
-      var b = document.createElement('button');
-      b.className = 'mob-btn';
-      b.textContent = g.name;
-      (function(c, idx) {
-        b.addEventListener('click', function() { openGallery(c, idx); toggleMob(); });
-      })(cat, i);
+      var b=document.createElement('button');b.className='mob-btn';b.textContent=g.name;
+      (function(c,n){b.addEventListener('click',function(){openGallery(c,n);toggleMob();});})(cat,i);
       mob.appendChild(b);
     });
   });
 }
 
-// ── GALLERY ──
-var gpCurrent = 0;
-var gpTotal = 0;
-
-function openGallery(cat, idx) {
-  var g = G[cat][idx];
-  document.getElementById('gp-title').textContent = g.name;
-  document.getElementById('gp-cat').textContent = CATS[cat];
-  var ss = document.getElementById('gp-slideshow');
-  var dots = document.getElementById('gp-dots');
-  ss.innerHTML = '';
-  dots.innerHTML = '';
-  gpCurrent = 0;
-  gpTotal = g.photos;
-
-  for (var i = 0; i < g.photos; i++) {
-    var src = '/kacumen-13.github.io/photos/' + cat + '/' + g.slug + '/photo-' + String(i+1).padStart(2,'0') + '.jpg';
-
-    var slide = document.createElement('div');
-    slide.className = 'gp-slide' + (i === 0 ? ' active' : '');
-
-    var img = document.createElement('img');
-    img.alt = g.name + ' ' + (i+1);
-    img.src = src;
-    slide.appendChild(img);
-    ss.appendChild(slide);
-
-    var dot = document.createElement('button');
-    dot.className = 'gp-dot' + (i === 0 ? ' active' : '');
-    (function(n){ dot.addEventListener('click', function(){ gpGo(n); }); })(i);
+// GALLERY
+function openGallery(cat,idx){
+  var g=G[cat][idx];
+  document.getElementById('gp-title').textContent=g.name;
+  document.getElementById('gp-cat').textContent=CATS[cat];
+  var ss=document.getElementById('gp-slideshow');
+  var dots=document.getElementById('gp-dots');
+  ss.innerHTML='';dots.innerHTML='';
+  gpCurrent=0;gpTotal=g.photos;
+  for(var i=0;i<g.photos;i++){
+    var src=BASE+'photos/'+cat+'/'+g.slug+'/photo-'+String(i+1).padStart(2,'0')+'.jpg';
+    var slide=document.createElement('div');
+    slide.className='gp-slide'+(i===0?' active':'');
+    var img=document.createElement('img');
+    img.alt=g.name+' '+(i+1);img.src=src;
+    slide.appendChild(img);ss.appendChild(slide);
+    var dot=document.createElement('button');
+    dot.className='gp-dot'+(i===0?' active':'');
+    (function(n){dot.addEventListener('click',function(){gpGo(n);});})(i);
     dots.appendChild(dot);
   }
-
-  document.getElementById('gp-counter').textContent = '1 / ' + gpTotal;
+  document.getElementById('gp-counter').textContent='1 / '+gpTotal;
   document.getElementById('gallery-page').classList.add('open');
 }
-
-function gpGo(n) {
-  var slides = document.querySelectorAll('.gp-slide');
-  var dots = document.querySelectorAll('.gp-dot');
-  slides[gpCurrent].classList.remove('active');
-  dots[gpCurrent].classList.remove('active');
-  gpCurrent = n;
-  slides[gpCurrent].classList.add('active');
-  dots[gpCurrent].classList.add('active');
-  document.getElementById('gp-counter').textContent = (gpCurrent+1) + ' / ' + gpTotal;
+function closeGallery(){document.getElementById('gallery-page').classList.remove('open');}
+function gpGo(n){
+  document.querySelectorAll('.gp-slide')[gpCurrent].classList.remove('active');
+  document.querySelectorAll('.gp-dot')[gpCurrent].classList.remove('active');
+  gpCurrent=n;
+  document.querySelectorAll('.gp-slide')[gpCurrent].classList.add('active');
+  document.querySelectorAll('.gp-dot')[gpCurrent].classList.add('active');
+  document.getElementById('gp-counter').textContent=(gpCurrent+1)+' / '+gpTotal;
 }
-function gpNext(){ gpGo((gpCurrent+1) % gpTotal); }
-function gpPrev(){ gpGo((gpCurrent-1+gpTotal) % gpTotal); }
+function gpNext(){gpGo((gpCurrent+1)%gpTotal);}
+function gpPrev(){gpGo((gpCurrent-1+gpTotal)%gpTotal);}
 
-function closeGallery() {
-  document.getElementById('gallery-page').classList.remove('open');
-}
-
-// ── LIGHTBOX ──
-function openLb(i) {
-  lbIndex = i;
-  document.getElementById('lb-img').src = lbPhotos[lbIndex];
-  document.getElementById('lb-count').textContent = (lbIndex+1) + ' / ' + lbPhotos.length;
-  document.getElementById('lightbox').classList.add('open');
-}
-function closeLb() { document.getElementById('lightbox').classList.remove('open'); }
-function lbNav(d) {
-  lbIndex = (lbIndex + d + lbPhotos.length) % lbPhotos.length;
-  document.getElementById('lb-img').src = lbPhotos[lbIndex];
-  document.getElementById('lb-count').textContent = (lbIndex+1) + ' / ' + lbPhotos.length;
-}
-
-// ── INNER PAGES ──
-var PAGES = {
-  about: {
-    title: 'About',
-    html: '<p>Leandro Lozada is a photojournalist based in Louisville, KY. He uses his camera and drone to document relevant stories.</p><p>His clients include the <strong style="font-weight:400">Washington Post</strong>, <strong style="font-weight:400">AFP</strong>, <strong style="font-weight:400">Politico Magazine</strong>, and <strong style="font-weight:400">Al Día News</strong>. His work has appeared in The Guardian, NPR, La Jornada, El País, The New York Times, CNN, and other publications.</p><p>He is available for assignments around the country and internationally.</p><p>Besides photography, Leandro loves his family, coffee, motorcycles, movies, music, books, and soccer.</p><p style="margin-top:32px"><a href="mailto:kacumen@gmail.com">kacumen@gmail.com</a><br><span style="font-size:13px;color:#aaa">502 407 4764</span></p><p style="margin-top:16px"><a href="https://instagram.com/lozada1816" target="_blank" rel="noopener">@lozada1816 on Instagram</a></p>'
-  },
-  contact: {
-    title: 'Contact',
-    html: '<p>Available for editorial, commercial, and documentary assignments worldwide.</p><p><a href="mailto:kacumen@gmail.com" style="font-size:15px">kacumen@gmail.com</a></p><p style="margin-top:8px"><span style="font-size:13px;color:#aaa">502 407 4764</span></p><p style="margin-top:28px"><a href="https://instagram.com/lozada1816" target="_blank" rel="noopener">Instagram — @lozada1816</a></p>'
-  }
+// INNER PAGES
+var PAGES={
+  about:{title:'About',html:'<p>Leandro Lozada is a photojournalist based in Louisville, KY. He uses his camera and drone to document relevant stories.</p><p>His clients include the <strong style="font-weight:400">Washington Post</strong>, <strong style="font-weight:400">AFP</strong>, <strong style="font-weight:400">Politico Magazine</strong>, and <strong style="font-weight:400">Al Día News</strong>. His work has appeared in The Guardian, NPR, La Jornada, El País, The New York Times, CNN, and other publications.</p><p>He is available for assignments around the country and internationally.</p><p>Besides photography, Leandro loves his family, coffee, motorcycles, movies, music, books, and soccer.</p><p style="margin-top:32px"><a href="mailto:kacumen@gmail.com">kacumen@gmail.com</a><br><span style="font-size:13px;color:#aaa">502 407 4764</span></p><p style="margin-top:16px"><a href="https://instagram.com/lozada1816" target="_blank" rel="noopener">@lozada1816 on Instagram</a></p>'},
+  contact:{title:'Contact',html:'<p>Available for editorial, commercial, and documentary assignments worldwide.</p><p><a href="mailto:kacumen@gmail.com" style="font-size:15px">kacumen@gmail.com</a></p><p style="margin-top:8px"><span style="font-size:13px;color:#aaa">502 407 4764</span></p><p style="margin-top:28px"><a href="https://instagram.com/lozada1816" target="_blank" rel="noopener">Instagram — @lozada1816</a></p>'}
 };
-
-function showPage(p) {
-  document.getElementById('ip-title').textContent = PAGES[p].title;
-  document.getElementById('ip-body').innerHTML = PAGES[p].html;
+function showPage(p){
+  document.getElementById('ip-title').textContent=PAGES[p].title;
+  document.getElementById('ip-body').innerHTML=PAGES[p].html;
   document.getElementById('inner-page').classList.add('open');
-  document.getElementById('inner-page').scrollTop = 0;
+  document.getElementById('inner-page').scrollTop=0;
 }
-function closePage() { document.getElementById('inner-page').classList.remove('open'); }
-function showHome() { closeGallery(); closePage(); }
+function closePage(){document.getElementById('inner-page').classList.remove('open');}
+function showHome(){closeGallery();closePage();}
 
-// ── MOBILE MENU ──
-function toggleMob() { document.getElementById('mob-menu').classList.toggle('open'); }
-document.addEventListener('click', function(e) {
-  var m = document.getElementById('mob-menu');
-  var nr = document.querySelector('.nav-right');
-  if (m.classList.contains('open') && !nr.contains(e.target)) {
-    m.classList.remove('open');
+// MOBILE
+function toggleMob(){document.getElementById('mob-menu').classList.toggle('open');}
+document.addEventListener('click',function(e){
+  var m=document.getElementById('mob-menu');
+  var nr=document.querySelector('.nav-right');
+  if(m.classList.contains('open')&&!nr.contains(e.target)){m.classList.remove('open');}
+});
+
+// KEYBOARD
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('gallery-page').classList.contains('open')){
+    if(e.key==='ArrowRight')gpNext();
+    if(e.key==='ArrowLeft')gpPrev();
+    if(e.key==='Escape')closeGallery();
+  } else if(!document.getElementById('inner-page').classList.contains('open')){
+    if(e.key==='ArrowRight')nextSlide();
+    if(e.key==='ArrowLeft')prevSlide();
   }
 });
 
-// ── KEYBOARD ──
-document.addEventListener('keydown', function(e) {
-  if (document.getElementById('lightbox').classList.contains('open')) {
-    if (e.key === 'ArrowRight') lbNav(1);
-    if (e.key === 'ArrowLeft') lbNav(-1);
-    if (e.key === 'Escape') closeLb();
-  } else if (document.getElementById('gallery-page').classList.contains('open')) {
-    if (e.key === 'ArrowRight') gpNext();
-    if (e.key === 'ArrowLeft') gpPrev();
-    if (e.key === 'Escape') closeGallery();
-  } else if (!document.getElementById('inner-page').classList.contains('open')) {
-    if (e.key === 'ArrowRight') nextSlide();
-    if (e.key === 'ArrowLeft') prevSlide();
-  }
-});
-
-// ── INIT ──
 buildNavs();
 buildSlideshow();
 </script>
