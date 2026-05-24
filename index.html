@@ -29,7 +29,7 @@ body{font-family:var(--sans);font-weight:300}
   cursor:pointer;
 }
 .slide.active{opacity:1}
-.slide img{width:100%;height:100%;object-fit:cover;display:block}
+.slide img{width:100%;height:100%;object-fit:contain;display:block;background:#111}
 .slide::after{
   content:'';position:absolute;inset:0;
   background:linear-gradient(to top,rgba(0,0,0,0.45) 0%,rgba(0,0,0,0.05) 50%,rgba(0,0,0,0.2) 100%);
@@ -370,7 +370,7 @@ function buildSlideshow(){
   all.forEach((p,i)=>{
     const s=document.createElement('div');
     s.className='slide'+(i===0?' active':'');
-    s.onclick=()=>openGallery(p.cat,p.idx);
+    s.onclick=(e)=>{e.stopPropagation();openGallery(p.cat,p.idx)};
     const img=document.createElement('img');
     img.alt=p.name;img.src=`photos/${p.cat}/${p.slug}/cover.jpg`;
     img.onerror=function(){
