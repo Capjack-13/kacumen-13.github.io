@@ -387,6 +387,9 @@ function buildSlideshow(){
   });
   updateInfo();
   timer=setInterval(()=>go((cur+1)%all.length),5000);
+  document.getElementById('slideshow').addEventListener('mouseenter',()=>clearInterval(timer));
+  document.getElementById('slideshow').addEventListener('touchstart',()=>clearInterval(timer));
+  document.getElementById('slideshow').addEventListener('mouseleave',()=>{timer=setInterval(()=>go((cur+1)%all.length),5000)});
 }
 function go(i){
   document.querySelectorAll('.slide')[cur].classList.remove('active');
